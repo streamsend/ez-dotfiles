@@ -39,7 +39,7 @@ set statusline+=%2(C(%v/125)%)\             " column
 set statusline+=%P
 
 set background=dark
-colorscheme ir_black
+colorscheme railscasts
 
 " save Jeff a key press
 map ; :

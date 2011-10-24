@@ -1,0 +1,105 @@
+set nocompatible                            " not compatible with vi
+
+filetype off                                " disable system ftdetect files
+call pathogen#runtime_append_all_bundles()  " initialize Pathogen
+syntax on                                   " enable syntax highlighting
+filetype plugin indent on                   " enable file type detection
+
+set expandtab                               " expand tabs to spaces
+set tabstop=2 softtabstop=2                 " number of spaces inserted for a tab
+set shiftwidth=2                            " number of spaces inserted per level of indent
+set incsearch                               " incremental searching
+set cursorline                              " highlight screen line of the cursor
+set scrolloff=3                             " always show 3 lines above/below cursor line
+set number                                  " display line numbers
+set showmatch                               " briefly displays matching bracket
+set wildmode=longest,list                   " shell-like file completion
+set splitbelow                              " new splits open below
+set splitright                              " new vsplits open to the right
+set backspace=indent,eol,start              " intuitive backspacing
+set hidden                                  " abandoned buffers hang around hidden
+set ignorecase                              " case-insensitive searching
+set smartcase                               " case-sensitive if expression contains capital
+set title                                   " set the terminal's title
+set visualbell                              " no beeping
+set directory=/tmp                          " keep swap files in one location
+set textwidth=0                             " disable automatic line breaking
+set nosmartindent                           " disable smart indenting
+set wrap                                    " wrap long lines
+
+set laststatus=2                            " always show statusline
+set statusline=
+set statusline+=%<\                         " cut at start
+set statusline+=%2*[%n%H%M%R%W]%*\          " buffer number, and flags
+set statusline+=%-40f\                      " relative path
+set statusline+=%=                          " seperate between right- and left-aligned
+set statusline+=%1*%y%*%*\                  " file type
+set statusline+=%10(L(%l/%L)%)\             " line
+set statusline+=%2(C(%v/125)%)\             " column
+set statusline+=%P
+
+set background=dark
+colorscheme ir_black
+
+" save Jeff a key press
+map ; :
+
+" rspec integration
+map ,t :call RunSpec("")<CR>
+map ,s :call RunSpec("-l " . <C-r>=line('.')<CR>)<CR>
+
+" configure ack
+let g:AckAllFiles = 0
+let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
+map <LocalLeader>aw :Ack '<C-R><C-W>'
+
+" hash rocket
+imap <C-L> <SPACE>=><SPACE>
+
+" command-t
+map <silent> <LocalLeader>t  :CommandT<CR>
+
+" retag
+map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
+
+" NERD Tree
+map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
+map <silent> <LocalLeader>nr :NERDTree<CR>
+map <silent> <LocalLeader>nf :NERDTreeFind<CR>
+
+" clear search highlight
+map <silent> <LocalLeader>nh :nohls<CR>
+map <silent> <LocalLeader>\ :nohls<CR>
+
+" comment/uncomment
+map <silent> <LocalLeader>cc :TComment<CR>
+map <silent> <LocalLeader>uc :TComment<CR>
+
+" check ruby syntax
+map <silent> <LocalLeader>rs :!ruby -c %<CR>
+
+" highlight trailing whitespace
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd BufRead,InsertLeave * match ExtraWhitespace /\s\+$/
+" Set up highlight group & retain through colorscheme changes
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
+
+" tab autocomplete or indent depending on context
+function! InsertTabWrapper()
+ let col = col('.') - 1
+ if !col || getline('.')[col - 1] !~ '\k'
+   return "\<tab>"
+ else
+   return "\<c-p>"
+ endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" execute open rspec buffer
+function! RunSpec(args)
+  let cmd = ":! spec % -cfn " . a:args
+  execute cmd
+endfunction

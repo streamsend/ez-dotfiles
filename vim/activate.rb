@@ -12,8 +12,8 @@ dot_files.each do |filename|
 
   if File.symlink?(target)
     FileUtils.rm(target)
-  else
-   File.mv(target, "#{target}.bak")
+  elsif File.exists?(target)
+   FileUtils.mv(target, "#{target}.bak")
   end
   FileUtils.ln_s filename,target
 end

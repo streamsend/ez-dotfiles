@@ -17,7 +17,6 @@ set wildmode=longest,list                   " shell-like file completion
 set splitbelow                              " new splits open below
 set splitright                              " new vsplits open to the right
 set backspace=indent,eol,start              " intuitive backspacing
-set hidden                                  " abandoned buffers hang around hidden
 set ignorecase                              " case-insensitive searching
 set smartcase                               " case-sensitive if expression contains capital
 set title                                   " set the terminal's title

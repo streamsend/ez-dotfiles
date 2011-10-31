@@ -32,6 +32,12 @@ Here are some useful things to try.
   * ,t : executes the current buffer line using RSpec
   * \aw : acks for the word under the cursor
   * \rs : checks the ruby syntax of the current buffer
+  * C-L : insert a hash rocket
+  * \t : invoke command-t
+  * \nt or F3 : toggle NERD tree
+  * C-j, C-k, C-l, C-h : navigate splits
+  * \cc : comment/uncomment code
+  * tab : autocomplete or indent as appropriate in insert mode
 
 We use these plugins, integrated using [Pathogen](https://github.com/tpope/vim-pathogen).
 

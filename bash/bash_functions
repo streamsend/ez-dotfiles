@@ -1,0 +1,23 @@
+function ss() {
+  export RR=$HOME/projects/streamsend
+  alias rr='cd $RR'
+  alias serve='script/server'
+  alias con='script/console'
+  cd $RR
+}
+
+function billing-api() {
+  export RR=$HOME/projects/billing-api
+  alias rr='cd $RR'
+  alias serve='script/server'
+  alias con='script/console'
+  cd $RR
+}
+
+function billing() {
+  export RR=$HOME/projects/billing
+  alias rr='cd $RR'
+  alias serve='script/server'
+  alias con='script/console'
+  cd $RR
+}

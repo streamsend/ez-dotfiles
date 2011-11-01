@@ -2,29 +2,18 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-function ss() {
-  export RR=$HOME/projects/streamsend
-  alias rr='cd $RR'
-  alias serve='script/server'
-  alias con='script/console'
-  cd $RR
-}
+# these are shared with zsh
+if [ -f $HOME/.bash_functions ]; then
+  . $HOME/.bash_functions
+fi
 
-function billing-api() {
-  export RR=$HOME/projects/billing-api
-  alias rr='cd $RR'
-  alias serve='script/server'
-  alias con='script/console'
-  cd $RR
-}
+if [ -f $HOME/.bash_path ]; then
+  . $HOME/.bash_path
+fi
 
-function billing() {
-  export RR=$HOME/projects/billing
-  alias rr='cd $RR'
-  alias serve='script/server'
-  alias con='script/console'
-  cd $RR
-}
+if [ -f $HOME/.bash_aliases ]; then
+  . $HOME/.bash_aliases
+fi
 
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ \(\1$(parse_git_dirty)\)/"
@@ -34,29 +23,10 @@ function parse_git_dirty {
   git diff-index --quiet --cached HEAD --ignore-submodules -- 2> /dev/null && git diff-files --quiet --ignore-submodules 2> /dev/null || echo ' *'
 }
 
-# my scripts
-export PATH=$HOME/scripts
-# /usr/local
-export PATH=$PATH:/usr/local/bin:/usr/local/mysql/bin
-# macports
-export PATH=$PATH:/opt/local/bin
-# system paths
-export PATH=$PATH:/usr/sbin:/sbin:/usr/bin:/bin
-
 export PS1='\u@\h:\W\[\e[32m\]$(parse_git_branch)\[\e[m\] % '
 export EDITOR=vim
 
 export LS_COLORS='no=00:fi=00:di=32:ln=35:pi=40;33:so=01;35:bd=40;33;01:cd=40;33;01:or=01;37;41:mi=01;05;37;41:ex=31'
 
-alias ls='ls -FG'
-alias ll='ls -l'
-alias lrt='ls -lrt'
-alias la='ls -al'
-alias h='history'
-alias p='pwd'
-alias l='ls -l'
-alias ezlogin='ssh login-1'
-alias gems='cd $GEM_HOME/gems'
-alias vi='vim'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

@@ -1,0 +1,39 @@
+# these are shared with bash
+if [ -f $HOME/.bash_functions ]; then
+  . $HOME/.bash_functions
+fi
+
+if [ -f $HOME/.bash_path ]; then
+  . $HOME/.bash_path
+fi
+
+if [ -f $HOME/.bash_aliases ]; then
+  . $HOME/.bash_aliases
+fi
+
+function precmd() {
+  PROMPT="%n@%m:%1~ %# "
+  local dotgit branch
+  dotgit=`findup .git`
+  if test -n "$dotgit"; then
+    branch=`sed -e 's|.*/||' $dotgit/HEAD`
+    PROMPT=`echo $PROMPT | sed -e "s|%# $|%{$fg[green]%}($branch)%{$reset_color%} %# |"`
+  fi
+  export PROMPT
+}
+
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+bindkey '^[[3~' delete-char
+zstyle :compinstall filename "$HOME/.zshrc"
+autoload -Uz compinit
+compinit
+
+autoload -U colors
+colors
+
+export LSCOLORS=cxexxxxxxxxxxxxxxxxxxx
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

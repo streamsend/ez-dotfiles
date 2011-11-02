@@ -106,6 +106,6 @@ inoremap <s-tab> <c-n>
 
 " execute open rspec buffer
 function! RunSpec(args)
-  let cmd = ":! clear && echo spec % -cfn " . a:args
+  let cmd = ":! clear && spec % -cfn " . a:args
   execute cmd
 endfunction

@@ -14,6 +14,7 @@ set scrolloff=3                             " always show 3 lines above/below cu
 set number                                  " display line numbers
 set showmatch                               " briefly displays matching bracket
 set wildmode=longest,list                   " shell-like file completion
+set wildignore=sharedfs/*                   " filter sharedfs out of command-t
 set splitbelow                              " new splits open below
 set splitright                              " new vsplits open to the right
 set backspace=indent,eol,start              " intuitive backspacing

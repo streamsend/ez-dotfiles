@@ -1,2 +1,2 @@
-term "screen-256color"
+term "xterm-256color"
 defscrollback 50000

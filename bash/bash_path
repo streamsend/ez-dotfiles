@@ -1,7 +1,7 @@
 # my scripts
 export PATH=$HOME/scripts
 # /usr/local
-export PATH=$PATH:/usr/local/bin:/usr/local/mysql/bin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin
 # macports
 export PATH=$PATH:/opt/local/bin
 # system paths

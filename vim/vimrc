@@ -58,7 +58,7 @@ map <LocalLeader>aw :Ack '<C-R><C-W>'
 imap <C-L> <SPACE>=><SPACE>
 
 " command-t
-map <silent> <LocalLeader>t  :CommandT<CR>
+map <silent> <LocalLeader>t :CommandTFlush<CR>\|:CommandT<CR>
 
 " retag
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>

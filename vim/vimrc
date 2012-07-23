@@ -107,9 +107,17 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
 " spec support
+function! GuessSpecCommand()
+  if executable("rspec")
+    return "rspec"
+  else
+    return "spec"
+  endif
+endfunction
+
 function! RunSpecFile()
   if InSpecFile()
-    let t:last_spec_file_command = "spec " . @% . " -cfn "
+    let t:last_spec_file_command = GuessSpecCommand() . " " . @% . " -cfn "
   endif
 
   call RunLastSpecFile()
@@ -117,7 +125,7 @@ endfunction
 
 function! RunNearestSpec()
   if InSpecFile()
-    let t:last_nearest_spec_command = "spec " . @% . " -cfn -l " . line(".")
+    let t:last_nearest_spec_command = GuessSpecCommand() . " " . @% . " -cfn -l " . line(".")
   endif
 
   call RunLastNearestSpec()

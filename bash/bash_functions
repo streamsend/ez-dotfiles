@@ -6,6 +6,14 @@ function ss() {
   cd $RR
 }
 
+function share() {
+  export RR=$HOME/projects/streamsend-share
+  alias rr='cd $RR'
+  alias serve='foreman start'
+  alias con='bin/console'
+  cd $RR
+}
+
 function billing-api() {
   export RR=$HOME/projects/billing-api
   alias rr='cd $RR'

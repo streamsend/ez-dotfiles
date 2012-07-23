@@ -30,3 +30,5 @@ export LS_COLORS='no=00:fi=00:di=32:ln=35:pi=40;33:so=01;35:bd=40;33;01:cd=40;33
 
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

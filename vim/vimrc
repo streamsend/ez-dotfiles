@@ -57,8 +57,10 @@ map <LocalLeader>aw :Ack '<C-R><C-W>'
 " hash rocket
 imap <C-L> <SPACE>=><SPACE>
 
-" command-t
-map <silent> <LocalLeader>t :CommandTFlush<CR>\|:CommandT<CR>
+" ctrlp
+map <silent> <LocalLeader>t  :CtrlP<CR>
+map <silent> <LocalLeader>b  :CtrlPBuffer<CR>
+map <silent> <LocalLeader>m  :CtrlPMRU<CR>
 
 " retag
 map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>

@@ -1,3 +1,11 @@
+function accounts() {
+  export RR=$HOME/projects/streamsend-accounts
+  alias rr='cd $RR'
+  alias serve='script/rails server'
+  alias con='script/rails console'
+  cd $RR
+}
+
 function ss() {
   export RR=$HOME/projects/streamsend
   alias rr='cd $RR'
@@ -11,6 +19,14 @@ function share() {
   alias rr='cd $RR'
   alias serve='foreman start'
   alias con='bin/console'
+  cd $RR
+}
+
+function shareable() {
+  export RR=$HOME/projects/shareable
+  alias rr='cd $RR'
+  alias serve='script/rails server'
+  alias con='script/rails console'
   cd $RR
 }
 

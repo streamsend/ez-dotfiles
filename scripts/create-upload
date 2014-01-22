@@ -1,0 +1,4 @@
+#!/bin/bash
+
+curl -i -v --form data=@upload -H 'Accept: application/xml' -u rootapiuser:password1 "http://localhost:30000/uploads"
+# curl -i -v --form data=@upload -H 'Accept: application/xml' -u 9BtwUUbVs9b7:NslDcw6Lay9cQmys "http://beta.streamsend.com/uploads"

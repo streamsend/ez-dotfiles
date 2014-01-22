@@ -1,10 +1,11 @@
 alias ls='ls -FG'
+export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
 alias ll='ls -l'
 alias lrt='ls -lrt'
 alias la='ls -al'
 alias h='history'
 alias p='pwd'
 alias l='ls -l'
-alias ezlogin='ssh login-1'
 alias gems='cd $GEM_HOME/gems'
 alias vi='vim'
+alias iri='ri -i'

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ln -fs ~/projects/dotfiles/scripts ~
+bash/activate.rb
+git/activate.rb
+tmux/activate.rb
+vim/activate.rb
+zsh/activate.rb

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+find . -name '*html' -print0 | while read -d $'\0' f
+do
+  echo $f
+  fname=`basename "$f" .html`.md
+  ~/projects/html2text/html2text.py "$f" > "$fname"
+done

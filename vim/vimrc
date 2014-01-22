@@ -1,10 +1,10 @@
-set nocompatible                            " not compatible with vi
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
 
+set nocompatible                            " not compatible with vi
 filetype off                                " disable system ftdetect files
-call pathogen#runtime_append_all_bundles()  " initialize Pathogen
 syntax on                                   " enable syntax highlighting
 filetype plugin indent on                   " enable file type detection
-
 set expandtab                               " expand tabs to spaces
 set tabstop=2 softtabstop=2                 " number of spaces inserted for a tab
 set shiftwidth=2                            " number of spaces inserted per level of indent
@@ -20,18 +20,18 @@ set splitright                              " new vsplits open to the right
 set backspace=indent,eol,start              " intuitive backspacing
 set ignorecase                              " case-insensitive searching
 set smartcase                               " case-sensitive if expression contains capital
-set title                                   " set the terminal's title
+" set title                                   " set the terminal's title
 set visualbell                              " no beeping
 set directory=/tmp                          " keep swap files in one location
 set textwidth=0                             " disable automatic line breaking
 set nosmartindent                           " disable smart indenting
 set wrap                                    " wrap long lines
 
-set laststatus=2                            " always show statusline
 set statusline=
 set statusline+=%<\                         " cut at start
 set statusline+=%2*[%n%H%M%R%W]%*\          " buffer number, and flags
 set statusline+=%-40f\                      " relative path
+set statusline+=%{fugitive#statusline()}    " git infos
 set statusline+=%=                          " seperate between right- and left-aligned
 set statusline+=%1*%y%*%*\                  " file type
 set statusline+=%10(L(%l/%L)%)\             " line
@@ -41,27 +41,40 @@ set statusline+=%P
 set background=dark
 colorscheme railscasts
 
-" save Jeff a key press
-map ; :
-
 " rspec integration
 map ,t :call RunSpecFile()<CR>
 map ,s :call RunNearestSpec()<CR>
 map ,l :call RunLastSpec()<CR>
 
+" vim helpers
+map ,m :set number!<CR>
+map ,p :set paste!<CR>
+
+" O should not be so slow
+set timeout timeoutlen=1000 ttimeoutlen=100
+
 " configure ack
 let g:AckAllFiles = 0
-let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp 2> /dev/null'
-map <LocalLeader>aw :Ack '<C-R><C-W>'
+let g:AckCmd = 'ack --type-add ruby=.feature --ignore-dir=tmp --ignore-dir=log 2> /dev/null'
+map <LocalLeader>aw :Ag '<C-R><C-W>'
 
 " hash rocket
 imap <C-L> <SPACE>=><SPACE>
 
-" command-t
-map <silent> <LocalLeader>t :CommandTFlush<CR>\|:CommandT<CR>
+" configure ctrl-p
+map <silent> <LocalLeader>t :CtrlP<CR>
+let g:ctrlp_user_command = 'mdfind -onlyin %s -name . | egrep -v "target/|log/|sharedfs/"'
+
+" ctrl-p
+let g:ctrlp_working_path_mode = ''
+let g:ctrlp_max_height = '30'
+let g:ctrlp_max_files = '1000000000'
+let g:ctrlp_max_depth = '100'
+let g:ctrlp_user_command = 'mdfind -onlyin %s -name .'
 
 " retag
-map <silent> <LocalLeader>rt :!ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
+map <silent> <LocalLeader>rt :!/opt/local/bin/ctags -R --exclude=".git\|.svn\|log\|tmp\|db\|pkg" --extra=+f<CR>
+
 
 " NERD Tree
 map <silent> <LocalLeader>nt :NERDTreeToggle<CR>
@@ -94,6 +107,8 @@ highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 map <silent> <LocalLeader>ws :highlight clear ExtraWhitespace<CR>
 
+au BufNewFile,BufRead *.hamlc set filetype=haml
+
 " tab autocomplete or indent depending on context
 function! InsertTabWrapper()
  let col = col('.') - 1
@@ -109,9 +124,9 @@ inoremap <s-tab> <c-n>
 " spec support
 function! GuessSpecCommand()
   if executable("rspec")
-    return "rspec"
+    return "bundle exec rspec"
   else
-    return "spec"
+    return "bundle exec spec"
   endif
 endfunction
 

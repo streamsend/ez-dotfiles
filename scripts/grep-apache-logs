@@ -1,0 +1,5 @@
+#!/bin/bash
+
+source streamsend-functions.sh
+
+serial-ssh grep $1 /www/logs/app.streamsend.com-access-log

@@ -13,10 +13,10 @@ fi
 
 function precmd() {
   PROMPT="%n@%m:%1~ %# "
-  local dotgit branch
-  dotgit=`findup .git`
-  if test -n "$dotgit"; then
-    branch=`sed -e 's|.*/||' $dotgit/HEAD`
+  local branch
+  branch=`git branch 2>/dev/null | awk '/\*/ {print $2}'`
+  branch=${branch//[[:space:]]/}
+  if [ -n "$branch" ]; then
     PROMPT=`echo $PROMPT | sed -e "s|%# $|%{$fg[green]%}($branch)%{$reset_color%} %# |"`
   fi
   export PROMPT
@@ -35,5 +35,3 @@ autoload -U colors
 colors
 
 export LSCOLORS=cxexxxxxxxxxxxxxxxxxxx
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"

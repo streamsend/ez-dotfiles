@@ -1,0 +1,3 @@
+ssh -Nf -L 8153:test-cassy-5.ezpublishing.com:8153 test-cassy-5 &
+ssh -Nf -L 15673:test-cassy-6.ezpublishing.com:15672 test-cassy-6 &
+ssh -Nf -L 8888:test-cassy-1.ezpublishing.com:8888 test-cassy-1 &

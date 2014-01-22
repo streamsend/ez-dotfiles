@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl -i -H 'Content-Type: application/xml' -u 9BtwUUbVs9b7:NslDcw6Lay9cQmys "https://beta.streamsend.com/blasts.xml" -d @customer-blast.xml

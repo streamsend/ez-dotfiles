@@ -1,0 +1,40 @@
+#!/bin/bash
+
+now=`RBENV_VERSION=1.9.3-p374 ruby -e 'require "date"; $stdout << Time.now.utc.to_datetime.xmlschema'`
+text_part=`RBENV_VERSION=1.9.3-p374 ruby -e '$stdout << ("T" * 1_000)'`
+
+xml="
+<blast>
+  <from>
+    <name>Chris O'Meara</name>
+    <email-address>comeara+notactivated@ezpublishing.com</email-address>
+  </from>
+  <to>comeara+staging@ezpublishing.com</to>
+  <subject>Suffering</subject>
+  <body>
+    <html-part>
+      <![CDATA[
+        <html>
+          <head><title>Suffering</title></head>
+          <body>
+            <p>
+              To live is to suffer, to survive is to find some meaning in the suffering.
+              <br/>
+              Friedrich Nietzsche
+            </p>
+          </body>
+        </html>
+      ]]>
+  </html-part>
+  <text-part>$text_part</text-part>
+  </body>
+  <options>
+    <track-views>true</track-views>
+    <track-clicks>true</track-clicks>
+    <include-social-bar>true</include-social-bar>
+  </options>
+  <scheduled-for>$now</scheduled-for>
+</blast>
+"
+#echo "\"$xml\"" | curl -i -H 'Content-Type: application/xml' -u 9BtwUUbVs9b7:NslDcw6Lay9cQmys "https://beta.streamsend.com/blasts/test.xml" -d @-
+echo "\"$xml\"" | curl -i -H 'Content-Type: application/xml' -H 'Accept: application/xml' -u rootapiuser:password1 "http://localhost:3000/blasts/test" -d @-

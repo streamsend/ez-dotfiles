@@ -10,7 +10,10 @@
   df = diff
   lg = log -p
 [user]
-	# name = Your Name
-	# email = you@example.com
+  user = Chris O'Meara
+  email = chris@omeara.com
 [branch]
-	autosetupmerge = true
+  autosetupmerge = true
+[core]
+  excludesfile = ~/.gitignore
+  excludesfile = ~/.cvsignore

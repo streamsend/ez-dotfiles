@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ln -fs ~/projects/dotfiles/scripts ~
+ln -fs ~/projects/dotfiles/iTerm/com.googlecode.iterm2.plist ~/Library/Preferences
 bash/activate.rb
 git/activate.rb
 tmux/activate.rb

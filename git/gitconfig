@@ -10,8 +10,8 @@
   df = diff
   lg = log -p
 [user]
-  user = Chris O'Meara
-  email = chris@omeara.com
+  user = StreamSend Engineering
+  email = engineering@streamsend.com
 [branch]
   autosetupmerge = true
 [core]
